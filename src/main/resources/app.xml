@@ -23,7 +23,7 @@
 	<context:annotation-config />
 	
 	<!-- 通过自动生成代理实现AOP的功能 -->
-	<aop:aspectj-autoproxy />
+	<!-- <aop:aspectj-autoproxy /> -->
 	
 	<!-- 配置数据库连接池(DBCP2) -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
