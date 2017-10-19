@@ -1,0 +1,5 @@
+字面常量
+```javascript
+var flag = /^\w{6,20}$/.test(username);
+```
+> javascript里的this, 谁调用谁是this
