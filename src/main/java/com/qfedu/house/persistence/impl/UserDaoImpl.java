@@ -1,11 +1,11 @@
 package com.qfedu.house.persistence.impl;
 
-import com.qfedu.house.domain.User;
-import com.qfedu.house.persistence.UserDao;
-
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
+import com.qfedu.house.domain.User;
+import com.qfedu.house.persistence.UserDao;
 
 @Repository
 public class UserDaoImpl 

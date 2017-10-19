@@ -23,6 +23,7 @@
 	<context:annotation-config />
 	
 	<!-- 通过自动生成代理实现AOP的功能 -->
+	<!-- aspectjrt / aspectjweaver -->
 	<!-- <aop:aspectj-autoproxy /> -->
 	
 	<!-- 配置数据库连接池(DBCP2) -->
@@ -58,6 +59,7 @@
 	</bean>
 	
 	<!-- 配置使用声明式事务 -->
+	<!-- @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 </beans>

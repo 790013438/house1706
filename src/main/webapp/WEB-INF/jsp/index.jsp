@@ -20,17 +20,19 @@
 				<img src="images/logo.png" />
 			</div>
 			<div id="headbar">
+				<!-- EL - Expression Language -->
+				<!-- pageScope / requestScope / sessionScope / applicationScope -->
 				<c:choose>
-					<c:when test="${not empty sessionScope.username}">
-						<a href="">${username}</a>&nbsp;&nbsp;
+					<c:when test="${not empty sessionScope.user}">
+						<a href="">${user.realname}</a>&nbsp;&nbsp;
 						<a href="logout">注销</a>
 					</c:when>
 					<c:otherwise>
-						<a href="login.jsp">用户登录</a>
+						<a href="toLogin">用户登录</a>
 					</c:otherwise>
 				</c:choose>
-				<a href="register.jsp">快速注册</a>
-				<c:if test="${not empty sessionScope.username}">
+				<a href="toReg">快速注册</a>
+				<c:if test="${not empty sessionScope.user}">
 					<div class="pub">
 						<a href="toPub.do">发布房源</a>
 					</div>
