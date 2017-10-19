@@ -34,12 +34,14 @@
 										<c:set var="currentUid" value="${username}" />
 									</c:if> 
 									<input id="username" type="text" class="text" name="username" value="${currentUid}">
+									<span id="uerror" style="color:red; font-size:12px;">${uerror}</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="field">密 码：</td>
 								<td>
 									<input id="password" type="password" class="text" name="password">
+									<span id="perror" style="color:red; font-size:12px;">${perror}</span>
 								</td>
 							</tr>
 							<tr>
@@ -73,28 +75,38 @@
 		</dl>
 	</div>
 	<script src="js/jquery-1.11.1.min.js"></script>
-	<script>
+	<script>	
 		$(function() {
+			/*
 			$('#loginForm').on('submit', function(evt) {
 				evt.preventDefault();
 				var username = $('#username').val();
 				var password = $('#password').val();
-				if (checkUsername(username) && checkPassword(password)) {
+				if (checkUsername(username) & checkPassword(password)) {
 					this.submit();
 				}
 			});
 			
+			$('#username').on('blur', function() {
+				checkUsername($(this).val());
+			});
+			
+			$('#password').on('blur', function() {
+				checkPassword($(this).val());
+			});
+			
 			function checkUsername(username) {
 				var flag = /^\w{6,20}$/.test(username);
-				flag ? $('#hint').text('') : $('#hint').text('无效的用户名');
+				flag ? $('#uerror').text('') : $('#uerror').text('无效的用户名');
 				return flag;
 			}
 			
 			function checkPassword(password) {
 				var flag = password.length >= 6;
-				flag ? $('#hint').text('') : $('#hint').text('密码不能少于6个字符');
+				flag ? $('#perror').text('') : $('#perror').text('密码不能少于6个字符');
 				return flag;
 			}
+			*/
 		});
 	
 		$('#code').on('click', function() {

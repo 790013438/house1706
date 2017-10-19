@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class Student {
 	private String name;
 	
@@ -34,9 +37,17 @@ public class Test {
 
 	// ջ֡
 	public static void main(String[] args) {
-		Student stu = new Student("Tom");
-		change(stu);
-		System.out.println(stu.getName());
+		Pattern pattern = Pattern.compile("\\w{6,20}?");
+		Matcher matcher = pattern.matcher("jackfruedjackfruedjackfrued");
+		// System.out.println(matcher.matches());
+		while (matcher.find()) {
+			System.out.println(matcher.group());
+		}
+	
+		
+//		Student stu = new Student("Tom");
+//		change(stu);
+//		System.out.println(stu.getName());
 		// String str = "hello";
 		// change(str);
 		// System.out.println(str);

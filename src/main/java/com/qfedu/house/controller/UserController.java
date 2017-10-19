@@ -2,10 +2,12 @@ package com.qfedu.house.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,14 +20,18 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/login")
-	public String doLogin(User user, HttpServletRequest request,  Model model) {
+	public String doLogin(@Valid User user, Errors errors, HttpServletRequest request,  Model model) {
 		String viewName = "login";
-		user.setIpAddress(request.getRemoteAddr());
-		if (userService.login(user)) {
-			request.getSession().setAttribute("user", user);
-			viewName = "redirect: home";
+		if (!errors.hasErrors()) {
+			user.setIpAddress(request.getRemoteAddr());
+			if (userService.login(user)) {
+				request.getSession().setAttribute("user", user);
+				viewName = "redirect: home";
+			} else {
+				model.addAttribute("hint", "用户名或密码错误");
+			}
 		} else {
-			model.addAttribute("hint", "用户名或密码错误");
+			model.addAttribute("hint", "请输入有效的登录信息");
 		}
 		return viewName;
 	}
