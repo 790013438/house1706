@@ -77,7 +77,6 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script>	
 		$(function() {
-			/*
 			$('#loginForm').on('submit', function(evt) {
 				evt.preventDefault();
 				var username = $('#username').val();
@@ -106,14 +105,14 @@
 				flag ? $('#perror').text('') : $('#perror').text('密码不能少于6个字符');
 				return flag;
 			}
-			*/
-		});
-	
-		$('#code').on('click', function() {
-			$(this).attr('src', 'code.do?' + Math.random());
-		});
-		$('#toRegBtn').on('click', function() {
-			location.href="toReg";
+			
+			$('#code').on('click', function() {
+				$(this).attr('src', 'code?' + Math.random());
+			});
+			
+			$('#toRegBtn').on('click', function() {
+				location.href="toReg";
+			});
 		});
 	</script>
 </body>

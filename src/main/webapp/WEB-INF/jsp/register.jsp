@@ -19,7 +19,7 @@
 					<dd class="past">填写个人信息</dd>
 				</dl>
 				<div class="box">
-					<form action="reg" method="post">
+					<form id="userRegisterForm" action="reg" method="post">
 						<div class="infos">
 							<table class="field">
 								<tr>
@@ -71,30 +71,14 @@
 				<dd>关于我们 · 联系方式 · 意见反馈 · 帮助中心</dd>
 			</dl>
 		</div>
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript">
-			$('#username').on('blur', function() {
-				var username = $(this).val();
-				$.ajax({
-					url: 'check.do',
-					data: { 'username': username },
-					success: function(data) {
-						if (data.indexOf('used') >= 0) {
-							showErrorHint();
-						} else {
-							showCorrectHint();
-						}
-					}
+			$(function() {
+				$('#userRegisterForm').on('submit', function(evt) {
+					evt.preventDefault();
+					this.submit();
 				});
 			});
-	
-			function showErrorHint() {
-				$('#isValid').text('X').css('color', 'red');
-			}
-	
-			function showCorrectHint() {
-				$('#isValid').text('√').css('color', 'green');
-			}
 		</script>
 	</body>
 </html>
