@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_user")
@@ -22,6 +23,8 @@ public class User implements Serializable {
 	private String tel;
 	@Column(name = "isadmin")
 	private Boolean admin;
+	@Transient
+	private String ipAddress;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +72,14 @@ public class User implements Serializable {
 
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
+	}
+	
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
 }

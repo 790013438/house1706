@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 				user.setRealname(temp.getRealname());
 				LoginLog loginLog = new LoginLog();
 				loginLog.setUser(temp);
-				loginLog.setIpAddress("211.135.62.90");
+				loginLog.setIpAddress(user.getIpAddress());
 				loginLog.setLogDate(new Date());
 				loginLogDao.save(loginLog);
 			}

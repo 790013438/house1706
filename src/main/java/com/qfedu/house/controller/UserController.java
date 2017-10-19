@@ -1,5 +1,6 @@
 package com.qfedu.house.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,11 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/login")
-	public String doLogin(User user, HttpSession session, Model model) {
+	public String doLogin(User user, HttpServletRequest request,  Model model) {
 		String viewName = "login";
+		user.setIpAddress(request.getRemoteAddr());
 		if (userService.login(user)) {
-			session.setAttribute("user", user);
+			request.getSession().setAttribute("user", user);
 			viewName = "redirect: home";
 		} else {
 			model.addAttribute("hint", "用户名或密码错误");

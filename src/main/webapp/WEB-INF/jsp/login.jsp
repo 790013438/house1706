@@ -17,12 +17,12 @@
 		<div class="dialog">
 			<div class="box">
 				<h4>用户登录</h4>
-				<form action="login" method="post">
+				<form id="loginForm" action="login" method="post">
 					<div class="infos">
 						<table class="field">
 							<tr>
 								<td>&nbsp;</td>
-								<td style="color: red;">${hint}</td>
+								<td style="color: red;" id="hint">${hint}</td>
 							</tr>
 							<tr>
 								<td class="field">用 户 名：</td>
@@ -74,6 +74,29 @@
 	</div>
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script>
+		$(function() {
+			$('#loginForm').on('submit', function(evt) {
+				evt.preventDefault();
+				var username = $('#username').val();
+				var password = $('#password').val();
+				if (checkUsername(username) && checkPassword(password)) {
+					this.submit();
+				}
+			});
+			
+			function checkUsername(username) {
+				var flag = /^\w{6,20}$/.test(username);
+				flag ? $('#hint').text('') : $('#hint').text('无效的用户名');
+				return flag;
+			}
+			
+			function checkPassword(password) {
+				var flag = password.length >= 6;
+				flag ? $('#hint').text('') : $('#hint').text('密码不能少于6个字符');
+				return flag;
+			}
+		});
+	
 		$('#code').on('click', function() {
 			$(this).attr('src', 'code.do?' + Math.random());
 		});
