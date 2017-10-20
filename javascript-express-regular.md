@@ -14,14 +14,14 @@ function (evt) {
 *** 
 :frog: :frog: :frog: 
     
-    ```javascript 
-        $('#username').val('tom')
-    ``` 
+```javascript 
+    $('#username').val('tom')
+``` 
 > * 传值
 
-    ```javascript 
-        $('#username').val()
-    ``` 
+```javascript 
+    $('#username').val()
+``` 
 * 取值
 ::unamused: :unamused: :unamused: 
 ***
