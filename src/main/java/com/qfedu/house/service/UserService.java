@@ -8,4 +8,6 @@ public interface UserService {
 	boolean login(UserLoginDto user);
 	
 	boolean register(User user);
+	
+	boolean checkUnique(String username);
 }

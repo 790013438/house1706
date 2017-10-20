@@ -54,4 +54,9 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	@Override
+	public boolean checkUnique(String username) {
+		return userDao.findByUsername(username) == null;
+	}
+
 }

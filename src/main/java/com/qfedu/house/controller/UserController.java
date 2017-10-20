@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qfedu.house.domain.User;
+import com.qfedu.house.dto.CheckResult;
 import com.qfedu.house.dto.UserLoginDto;
 import com.qfedu.house.service.UserService;
 
@@ -19,6 +21,15 @@ import com.qfedu.house.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping("/check")
+	@ResponseBody
+	public CheckResult checkUsername(String username) {
+		boolean valid = userService.checkUnique(username);
+		return new CheckResult(username, valid, 
+					valid ? "用户名可用" : "用户名已被使用", 
+					valid ? "ok.png" : "no.png");
+	}
 	
 	@PostMapping("/login")
 	public String doLogin(@Valid UserLoginDto user, Errors errors, HttpServletRequest request,  Model model) {
