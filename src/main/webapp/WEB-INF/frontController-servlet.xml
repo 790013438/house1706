@@ -14,7 +14,12 @@
 	<context:component-scan base-package="com.qfedu.house.controller" />
 	
 	<!-- 通过注解配置Spring MVC -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	
 	<!-- 配置使用应用服务器(Tomcat)默认的Servlet处理静态资源 -->
 	<mvc:default-servlet-handler />

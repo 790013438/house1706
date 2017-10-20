@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qfedu.house.domain.LoginLog;
 import com.qfedu.house.domain.User;
+import com.qfedu.house.dto.UserLoginDto;
 import com.qfedu.house.persistence.LoginLogDao;
 import com.qfedu.house.persistence.UserDao;
 import com.qfedu.house.service.UserService;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	private LoginLogDao loginLogDao;
 	
 	@Override
-	public boolean login(User user) {
+	public boolean login(UserLoginDto user) {
 		boolean flag = false;
 		User temp = userDao.findByUsername(user.getUsername());
 		if (temp != null) {

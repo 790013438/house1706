@@ -8,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_user")
@@ -19,16 +16,14 @@ public class User implements Serializable {
 	@Column(name = "userid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Pattern(regexp = "\\w{6,20}")
 	private String username;
-	@Size(min = 6, max = 20)
 	private String password;
 	private String realname;
 	private String tel;
 	@Column(name = "isadmin")
 	private Boolean admin;
-	@Transient
-	private String ipAddress;
+//	@Transient
+//	private String ipAddress;
 
 	public Integer getId() {
 		return id;
@@ -78,12 +73,12 @@ public class User implements Serializable {
 		this.admin = admin;
 	}
 	
-	public String getIpAddress() {
-		return ipAddress;
-	}
-	
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
+//	public String getIpAddress() {
+//		return ipAddress;
+//	}
+//	
+//	public void setIpAddress(String ipAddress) {
+//		this.ipAddress = ipAddress;
+//	}
 
 }

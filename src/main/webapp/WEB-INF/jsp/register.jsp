@@ -19,7 +19,7 @@
 					<dd class="past">填写个人信息</dd>
 				</dl>
 				<div class="box">
-					<form id="userRegisterForm" action="reg" method="post">
+					<form id="registerForm" action="reg" method="post">
 						<div class="infos">
 							<table class="field">
 								<tr>
@@ -58,7 +58,7 @@
 								</tr>
 							</table>
 							<div class="buttons">
-								<input type="submit" name="submit" value="立即注册" />
+								<input type="submit" value="立即注册" />
 							</div>
 						</div>
 					</form>
@@ -71,10 +71,10 @@
 				<dd>关于我们 · 联系方式 · 意见反馈 · 帮助中心</dd>
 			</dl>
 		</div>
-		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$('#userRegisterForm').on('submit', function(evt) {
+				$('#registerForm').on('submit', function(evt) {
 					evt.preventDefault();
 					this.submit();
 				});

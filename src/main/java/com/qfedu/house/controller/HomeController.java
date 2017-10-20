@@ -2,12 +2,11 @@ package com.qfedu.house.controller;
 
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qfedu.house.util.CommonUtil;
 
@@ -22,13 +21,12 @@ public class HomeController {
 		return "index";
 	}
 	
-	@GetMapping("/code")
-	public void getCode(HttpServletResponse resp, HttpSession session) throws Exception {
+	@GetMapping(value = "/code", produces = "image/png")
+	@ResponseBody
+	public BufferedImage getCode(HttpSession session) {
 		String code = CommonUtil.generateCode(CODE_LENGTH);
 		session.setAttribute("code", code);
-		resp.setContentType("image/png");
-		BufferedImage codeImage = CommonUtil.generateCodeImage(code, 80, 30);
-		ImageIO.write(codeImage, "PNG", resp.getOutputStream());
+		return CommonUtil.generateCodeImage(code, 80, 30);
 	}
 	
 	@GetMapping("/toLogin")

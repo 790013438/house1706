@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.qfedu.house.domain.User;
+import com.qfedu.house.dto.UserLoginDto;
 import com.qfedu.house.service.UserService;
 
 @Controller
@@ -20,18 +21,24 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/login")
-	public String doLogin(@Valid User user, Errors errors, HttpServletRequest request,  Model model) {
+	public String doLogin(@Valid UserLoginDto user, Errors errors, HttpServletRequest request,  Model model) {
 		String viewName = "login";
-		if (!errors.hasErrors()) {
-			user.setIpAddress(request.getRemoteAddr());
-			if (userService.login(user)) {
-				request.getSession().setAttribute("user", user);
-				viewName = "redirect: home";
+		String codeFromServer = (String) request.getSession().getAttribute("code");
+		if (codeFromServer.equalsIgnoreCase(user.getCode())) {
+			if (!errors.hasErrors()) {
+				user.setIpAddress(request.getRemoteAddr());
+				if (userService.login(user)) {
+					request.getSession().setAttribute("userId", user.getId());
+					request.getSession().setAttribute("userRealname", user.getRealname());
+					viewName = "redirect: home";
+				} else {
+					model.addAttribute("hint", "用户名或密码错误");
+				}
 			} else {
-				model.addAttribute("hint", "用户名或密码错误");
-			}
+				model.addAttribute("hint", "请输入有效的登录信息");
+			} 
 		} else {
-			model.addAttribute("hint", "请输入有效的登录信息");
+			model.addAttribute("hint", "请输入正确的验证码");
 		}
 		return viewName;
 	}

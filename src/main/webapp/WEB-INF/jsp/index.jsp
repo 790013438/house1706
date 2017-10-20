@@ -23,8 +23,8 @@
 				<!-- EL - Expression Language -->
 				<!-- pageScope / requestScope / sessionScope / applicationScope -->
 				<c:choose>
-					<c:when test="${not empty sessionScope.user}">
-						<a href="">${user.realname}</a>&nbsp;&nbsp;
+					<c:when test="${not empty sessionScope.userId}">
+						<a href="">${userRealname}</a>&nbsp;&nbsp;
 						<a href="logout">注销</a>
 					</c:when>
 					<c:otherwise>
@@ -32,7 +32,7 @@
 					</c:otherwise>
 				</c:choose>
 				<a href="toReg">快速注册</a>
-				<c:if test="${not empty sessionScope.user}">
+				<c:if test="${not empty sessionScope.userId}">
 					<div class="pub">
 						<a href="toPub.do">发布房源</a>
 					</div>

@@ -47,6 +47,7 @@
                 hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
                 hibernate.show_sql=true
                 hibernate.format_sql=true
+                javax.persistence.validation.mode=none
             </value>
 		</property>
 	</bean>
