@@ -10,14 +10,14 @@ function (evt) {
 ``` 
 > javascript里的this, 谁调用谁是this
 
-```javascript 
+>> ```javascript 
     $('#username').val('tom')
 ``` 
-> * 传值
+>> * 传值
 
-```javascript 
+>> ```javascript 
     $('#username').val()
 ``` 
-> * 取值
+>> * 取值
 
 > * 每个jQuery对象相当于数组
