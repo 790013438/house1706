@@ -41,6 +41,7 @@ public class HomeController {
 	
 	@GetMapping("toPub") 
 	public String toPub() {
+		
 		return "pub";
 	}
 }

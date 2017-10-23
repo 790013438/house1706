@@ -34,13 +34,13 @@
 				<a href="toReg">快速注册</a>
 				<c:if test="${not empty sessionScope.userId}">
 					<div class="pub">
-						<a href="toPub.do">发布房源</a>
+						<a href="toPub">发布房源</a>
 					</div>
 				</c:if>
 			</div>
 		</div>
 		<div id="navbar" class="wrap">
-			<form method="post" action="index.do" id='sform'>
+			<form method="post" action="index" id='sform'>
 				<div class="search clearfix">
 					<div class="fl">
 						<ul>
@@ -144,14 +144,14 @@
 			</table>
 			<div class="pager">
 				<ul>
-					<li class="current"><a href="index.do?page=1">首页</a></li>
+					<li class="current"><a href="index?page=1">首页</a></li>
 					<c:if test="${currentPage > 1}">
-					<li><a href="index.do?page=${currentPage - 1}">上一页</a></li>
+					<li><a href="index?page=${currentPage - 1}">上一页</a></li>
 					</c:if>
 					<c:if test="${currentPage < totalPage}">
-					<li><a href="index.do?page=${currentPage + 1}">下一页</a></li>
+					<li><a href="index?page=${currentPage + 1}">下一页</a></li>
 					</c:if>
-					<li><a href="index.do?page=${totalPage}">末页</a></li>
+					<li><a href="index?page=${totalPage}">末页</a></li>
 				</ul>
 				<span class="total">${currentPage}/${totalPage}页</span>
 			</div>
