@@ -38,4 +38,9 @@ public class HomeController {
 	public String toReg() {
 		return "register";
 	}
+	
+	@GetMapping("toPub") 
+	public String toPub() {
+		return "pub";
+	}
 }

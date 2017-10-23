@@ -1,10 +1,9 @@
 package com.qfedu.house.controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+// @ControllerAdvice
 public class MyExceptionAdvice {
 
 	@ExceptionHandler({ Exception.class })

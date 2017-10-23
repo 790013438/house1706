@@ -74,9 +74,20 @@
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
+				var isValid = false;
 				$('#registerForm').on('submit', function(evt) {
 					evt.preventDefault();
-					this.submit();
+					// ...
+					evt.target.submit();
+				});
+				
+				$('#username').on('blur', function() {
+					var username = $(this).val();
+					$.getJSON('check?username=' + username, function(json) {
+						isValid = json.valid;
+						$('#isValid').children().remove();
+						$('#isValid').append($('<img>').attr('src', 'images/' + json.picture));
+					});
 				});
 			});
 		</script>
