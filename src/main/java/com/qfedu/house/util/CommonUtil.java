@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 public final class CommonUtil {
 	private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -65,5 +66,23 @@ public final class CommonUtil {
 //			g.drawLine(x1, y1, x2, y2);
 //		}
 		return codeImage;
+	}
+	
+	/**
+	 * 获得全局唯一的文件名
+	 */
+	public static String getUniqueFilename() {
+		return UUID.randomUUID().toString();
+	}
+	
+	/**
+	 * 获取文件名中的后缀名
+	 * @param filename 文件名
+	 * @return 后缀名
+	 */
+	public static String getFilenameSuffix(String filename) {
+		int index = filename.lastIndexOf(".");
+		return index > 0 && index < filename.length() - 1 ? 
+			filename.substring(index) : "";
 	}
 }

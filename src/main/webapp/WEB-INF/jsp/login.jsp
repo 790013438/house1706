@@ -22,7 +22,7 @@
 						<table class="field">
 							<tr>
 								<td>&nbsp;</td>
-								<td style="color: red;" id="hint">${hint}</td>
+								<td style="color: red;" id="hint">${hint}${param.hint}</td>
 							</tr>
 							<tr>
 								<td class="field">用 户 名：</td>

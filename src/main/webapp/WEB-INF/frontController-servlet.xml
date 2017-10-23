@@ -13,6 +13,15 @@
 	<!-- 在哪个包以及子包下搜索被@Controller注解标记的控制器 -->
 	<context:component-scan base-package="com.qfedu.house.controller" />
 	
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/toPub" />
+			<mvc:mapping path="/addHouse" />
+			<bean class="com.qfedu.house.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- 通过注解配置Spring MVC -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -24,6 +33,13 @@
 	
 	<!-- 配置使用应用服务器(Tomcat)默认的Servlet处理静态资源 -->
 	<mvc:default-servlet-handler />
+	
+	<!-- 配置上传文件的视图解析器 -->
+	<!-- Servlet 3 - StandardServletMultipartResolver -->
+	<!-- Apache Commons FileUpload - CommonsMultipartResolver -->
+	<!-- 如果使用Servlet 3原生的文件上传支持那么需要在配置DispatcherServlet时指定multipart-config -->
+	<!-- 如果使用Apache的Commons-FileUpload那么需要在依赖项中加入commons-fileupload的jar文件 -->
+	<bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
 	<!-- 配置JSP的视图解析器对象 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

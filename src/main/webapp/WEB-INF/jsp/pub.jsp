@@ -23,7 +23,7 @@
 					<dd class="past">填写房屋信息</dd>
 				</dl>
 				<div class="box">
-					<form action="pub.do" method="post" enctype="multipart/form-data">
+					<form action="addHouse" method="post" enctype="multipart/form-data">
 						<div style="color:red;">${hint}</div>
 						<div class="infos">
 							<table class="field">
@@ -35,7 +35,7 @@
 									<td class="field">户 型：</td>
 									<td>
 										<select  class="text" name="houseType.id">
-											<c:forEach items="${houseTypeList}" var="type">
+											<c:forEach items="${applicationScope.houseTypeList}" var="type">
 											<option value="${type.id}">${type.name}</option>
 											</c:forEach>
 										</select>
@@ -63,8 +63,8 @@
 									<td>	
 										<select  id="prov" class="text" name="province.id">
 											<option value="0">请选择</option>
-											<c:forEach items="${provList}" var="prov">
-											<option value='${prov.id}'>${prov.name}</option>
+											<c:forEach items="${applicationScope.provinceList}" var="prov">
+											<option value="${prov.id}">${prov.name}</option>
 											</c:forEach>
 										</select>
 										<select  id="city" class="text" name="city.id" disabled>
@@ -110,7 +110,7 @@
 								</tr>
 		                        <tr>
 									<td class="field">详细信息：</td>
-									<td><textarea name="introduction"></textarea></td>
+									<td><textarea name="detail"></textarea></td>
 								</tr>
 							</table>
 							<div class="buttons"><input type="submit" value="立即发布"></div>
@@ -135,7 +135,7 @@
 					$('#dist').attr('disabled', 'disabled');
 					var provId = $(this).val();
 					if (provId != 0) {
-						$.getJSON('cities.do', {'provId': provId}, function(data) {
+						$.getJSON('cities', {'id': provId}, function(data) {
 							var citySelect = $('#city').removeAttr('disabled');
 							$('#city option:gt(0)').remove();
 							for (var i = 0, len = data.length; i < len; ++i) {
@@ -145,7 +145,7 @@
 							citySelect.on('change', function() {
 								var cityId = $(this).val();
 								if (cityId != 0) {
-									$.getJSON('district.do', {'cityId':cityId}, function(data) {
+									$.getJSON('districts', {'id':cityId}, function(data) {
 										var distSelect = $('#dist').removeAttr('disabled');
 										$('#dist option:gt(0)').remove();
 										for (var i = 0, len = data.length; i < len; ++i) {

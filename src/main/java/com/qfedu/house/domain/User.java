@@ -24,6 +24,13 @@ public class User implements Serializable {
 	private Boolean admin;
 //	@Transient
 //	private String ipAddress;
+	
+	public User() {
+	}
+
+	public User(Integer id) {
+		this.id =id;
+	}
 
 	public Integer getId() {
 		return id;
