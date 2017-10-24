@@ -16,7 +16,9 @@ public class HouseDaoImpl
 	@Override
 	public PageBean<House> findByPage(int page, int size) {
 		List<House> dataModel = sessionFactory.getCurrentSession()
-				.createQuery("from House as h order by h.pubDate desc", House.class)
+				.createQuery("from House as h left join fetch h.houseType "
+						+ " left join fetch h.district "
+						+ " order by h.pubDate desc", House.class)
 				.setFirstResult((page - 1) * size)
 				.setMaxResults(size)
 				.getResultList();

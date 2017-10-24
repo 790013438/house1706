@@ -1,5 +1,7 @@
 package com.qfedu.house.listener;
 
+import java.nio.charset.Charset;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -14,6 +16,7 @@ public class PreLoadDataListener implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		System.out.println(Charset.defaultCharset());
 		ServletContext sc = sce.getServletContext();
 		WebApplicationContext wac = 
 				WebApplicationContextUtils.getWebApplicationContext(sc);

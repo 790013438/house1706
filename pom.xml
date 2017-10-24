@@ -53,6 +53,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- Spring Context Support - 整合第三方方案 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>4.3.10.RELEASE</version>
+		</dependency>
 		<!-- Spring整合ORM框架相关API -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -95,6 +101,12 @@
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.39</version>
+		</dependency>
+		<!-- Freemarker模板引擎 -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.23</version>
 		</dependency>
 	</dependencies>
 	<build>

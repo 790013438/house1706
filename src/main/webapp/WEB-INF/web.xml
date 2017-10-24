@@ -41,12 +41,32 @@
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
 		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- Open Session In View 过滤器 -->
+	<!-- 这种做法不适合访问量较大或高并发场景 这是一种反模式 -->
+	<!-- 最好的做法是根据需要在业务层强制加载或者通过组装DTO的方式加载数据 -->
+	<!-- 如果要避免1+N查询问题那么需要通过迫切加载的方式拿到需要的数据 -->
+	<!-- 
+	<filter>
+		<filter-name>osiv</filter-name>
+		<filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>osiv</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
 	
 	<!-- <error-page>
 		<error-code>404</error-code>

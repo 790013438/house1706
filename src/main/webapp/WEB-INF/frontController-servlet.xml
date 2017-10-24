@@ -46,6 +46,25 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
+		<property name="order" value="10" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	    <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+	    <property name="defaultEncoding" value="utf-8"/>
+	    <property name="freemarkerSettings">
+	    	<props>
+	    		<prop key="classic_compatible">true</prop>
+	    	</props>
+	    </property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+	    <property name="contentType" value="text/html; charset=utf-8" />
+	    <property name="cache" value="true"/>
+	    <property name="prefix" value=""/>
+	    <property name="suffix" value=".ftl"/>
+	    <property name="order" value="4"/>
 	</bean>
 	
 </beans>
