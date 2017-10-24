@@ -28,21 +28,25 @@ public class HouseController {
 			MultipartFile[] photo, HttpServletRequest req, Model model) throws IOException {
 		String viewName = "pub";
 		String originalFilename = primaryPhoto.getOriginalFilename();
-		String newFilename = CommonUtil.getUniqueFilename() + 
-				CommonUtil.getFilenameSuffix(originalFilename);
-		String path = req.getServletContext().getRealPath("/images/upload");
-		// 保存上传文件到指定的文件中
-		primaryPhoto.transferTo(new File(path + "/" + newFilename));
-		house.setMainPhoto(newFilename);
-		// 用服务器的日期作为发布日期
-		house.setPubDate(new Date());
-		// 从HttpSession中获得userId
-		Integer userId = (Integer) req.getSession().getAttribute("userId");
-		house.setUser(new User(userId));
-		if (houseService.publishNewHouse(house)) {
-			viewName = "redirect: home";
+		if (!primaryPhoto.isEmpty()) {
+			String newFilename = CommonUtil.getUniqueFilename() + 
+					CommonUtil.getFilenameSuffix(originalFilename);
+			String path = req.getServletContext().getRealPath("/images/upload");
+			// 保存上传文件到指定的文件中
+			primaryPhoto.transferTo(new File(path + "/" + newFilename));
+			house.setMainPhoto(newFilename);
+			// 用服务器的日期作为发布日期
+			house.setPubDate(new Date());
+			// 从HttpSession中获得userId
+			Integer userId = (Integer) req.getSession().getAttribute("userId");
+			house.setUser(new User(userId));
+			if (houseService.publishNewHouse(house)) {
+				viewName = "redirect: home";
+			} else {
+				model.addAttribute("hint", "发布失败请重新尝试");
+			}
 		} else {
-			model.addAttribute("hint", "发布失败请重新尝试");
+			model.addAttribute("hint", "请为发布的房源上传图片");
 		}
 		return viewName;
 	}

@@ -120,7 +120,7 @@
 					<tr>
 						<td class="house-thumb">
 							<div>
-								<img src="images/${house.mainPhoto}" width="160" height="120" alt=""> 
+								<img src="images/upload/${house.mainPhoto}" width="160" height="120" alt=""> 
 								<span class="count">1图</span>
 							</div>
 						</td>
@@ -144,14 +144,14 @@
 			</table>
 			<div class="pager">
 				<ul>
-					<li class="current"><a href="index?page=1">首页</a></li>
+					<li class="current"><a href="home?page=1">首页</a></li>
 					<c:if test="${currentPage > 1}">
-					<li><a href="index?page=${currentPage - 1}">上一页</a></li>
+					<li><a href="home?page=${currentPage - 1}">上一页</a></li>
 					</c:if>
 					<c:if test="${currentPage < totalPage}">
-					<li><a href="index?page=${currentPage + 1}">下一页</a></li>
+					<li><a href="home?page=${currentPage + 1}">下一页</a></li>
 					</c:if>
-					<li><a href="index?page=${totalPage}">末页</a></li>
+					<li><a href="home?page=${totalPage}">末页</a></li>
 				</ul>
 				<span class="total">${currentPage}/${totalPage}页</span>
 			</div>
