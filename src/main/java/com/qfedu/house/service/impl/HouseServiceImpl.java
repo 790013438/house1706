@@ -13,6 +13,8 @@ import com.qfedu.house.dto.SearchHouseParam;
 import com.qfedu.house.persistence.HouseDao;
 import com.qfedu.house.persistence.HouseTypeDao;
 import com.qfedu.house.service.HouseService;
+import com.qfedu.house.util.HQLQueryBean;
+import com.qfedu.house.util.QueryBean;
 
 @Service
 public class HouseServiceImpl implements HouseService {
@@ -39,9 +41,18 @@ public class HouseServiceImpl implements HouseService {
 		return houseDao.findByPage(page, size);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public PageBean<House> searchHousesWithParamByPage(SearchHouseParam param, int page, int size) {
-		return null;
+		QueryBean queryBean = new HQLQueryBean(House.class)
+				.addCondition("title like ?", "%" + param.getTitle() + "%")
+				.addCondition(param.getHouseType().getId() != 0, "houseType=?", param.getHouseType())
+				.addCondition("area>=?", param.getMinArea())
+				.addCondition("area<=?", param.getMaxArea())
+				.addCondition("price>=?", param.getMinPrice())
+				.addCondition("price<=?", param.getMaxPrice())
+				.addOrderBy("pubDate", false);
+		return houseDao.findByQueryAndPage(queryBean, page, size);
 	}
 
 }

@@ -20,7 +20,7 @@ public class HQLQueryBean implements QueryBean {
 			if (orderbyClouse == null) {
 				orderbyClouse = " order by o." + keyword + (asc ? " asc " : " desc ");
 			} else {
-				orderbyClouse += ", o." + keyword + (asc? "asc" : "desc");
+				orderbyClouse += ", o." + keyword + (asc? " asc " : " desc ");
 			}
 		}
 		return this;

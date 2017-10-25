@@ -2,7 +2,6 @@ package com.qfedu.house.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ public class District {
 	private Integer id;
 	@Column(name = "distname")
 	private String name;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
 
