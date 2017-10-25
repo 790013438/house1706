@@ -23,13 +23,24 @@
 	</mvc:interceptors>
 	
 	<!-- 通过注解配置Spring MVC -->
-	<mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!-- 配置转换服务的工厂对象 -->
+	<bean id="conversionService" 
+			class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 指定自定义转换器 -->
+		<property name="converters">
+			<set>
+				<bean class="com.qfedu.house.converter.LocationConverter" />
+			</set>
+		</property>
+	</bean>
 	
 	<!-- 配置使用应用服务器(Tomcat)默认的Servlet处理静态资源 -->
 	<mvc:default-servlet-handler />

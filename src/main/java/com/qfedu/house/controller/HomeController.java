@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.qfedu.house.domain.City;
 import com.qfedu.house.domain.District;
 import com.qfedu.house.domain.House;
+import com.qfedu.house.domain.Location;
 import com.qfedu.house.domain.Province;
 import com.qfedu.house.dto.PageBean;
 import com.qfedu.house.service.HouseService;
@@ -29,6 +30,15 @@ public class HomeController {
 	private LocationService locationService;
 	@Autowired
 	private HouseService houseService;
+	
+	// test?location=104.4321-31.1234-55.5555
+	@GetMapping("/test")
+	public String test(Location location) {
+		System.out.println(location.getLongitude());
+		System.out.println(location.getLatitude());
+		System.out.println(location.getAltitude());
+		return "redirect: toLogin";
+	}
 
 	@GetMapping({ "/", "/home" })
 	public String toIndex(
