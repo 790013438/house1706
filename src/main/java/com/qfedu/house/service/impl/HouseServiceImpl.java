@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.qfedu.house.domain.House;
 import com.qfedu.house.domain.HouseType;
 import com.qfedu.house.dto.PageBean;
+import com.qfedu.house.dto.SearchHouseParam;
 import com.qfedu.house.persistence.HouseDao;
 import com.qfedu.house.persistence.HouseTypeDao;
 import com.qfedu.house.service.HouseService;
@@ -36,6 +37,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public PageBean<House> listHousesByPage(int page, int size) {
 		return houseDao.findByPage(page, size);
+	}
+
+	@Override
+	public PageBean<House> searchHousesWithParamByPage(SearchHouseParam param, int page, int size) {
+		return null;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.qfedu.house.domain.House;
 import com.qfedu.house.dto.PageBean;
 import com.qfedu.house.persistence.HouseDao;
+import com.qfedu.house.util.QueryBean;
 
 @Repository
 public class HouseDaoImpl 
@@ -27,5 +28,11 @@ public class HouseDaoImpl
 				.getSingleResult().intValue();
 		int totalPage = (count - 1) / size + 1;
 		return new PageBean<>(dataModel, totalPage, page, size);
+	}
+
+	@Override
+	public PageBean<House> findByQueryAndPage(QueryBean queryBean, int page, int size) {
+		
+		return null;
 	}
 }

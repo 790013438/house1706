@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.qfedu.house.domain.House;
 import com.qfedu.house.domain.User;
+import com.qfedu.house.dto.SearchHouseParam;
 import com.qfedu.house.service.HouseService;
 import com.qfedu.house.util.CommonUtil;
 
@@ -22,6 +24,15 @@ public class HouseController {
 	
 	@Autowired
 	private HouseService houseService;
+	
+	@PostMapping("/searchHouse")
+	public String searchHouse(SearchHouseParam param,
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int size,
+			Model model) {
+		
+		return "index";
+	}
 
 	@PostMapping("/addHouse")
 	public String addHouse(House house, MultipartFile primaryPhoto, 

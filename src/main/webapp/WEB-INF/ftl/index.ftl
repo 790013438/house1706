@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div id="navbar" class="wrap">
-			<form method="post" action="index" id='sform'>
+			<form method="post" action="searchHouse">
 				<div class="search clearfix">
 					<div class="fl">
 						<ul>
@@ -51,10 +51,10 @@
 						<ul>
 							<li class="first">价格</li>
 							<li>
-								<select name='house.price' id='price'>
-									<option value='不限'>不限</option>
-									<option value='0-600'>600元以下</option>
-									<option value='600-1000'>600元—1000元</option>
+								<select name="price">
+									<option value="不限">不限</option>
+									<option value="0-600">600元以下</option>
+									<option value="600-1000">600元—1000元</option>
 									<option value='1000-1500'>1000元—1500元</option>
 									<option value='1500-2000'>1500元—2000元</option>
 									<option value='2000-3000'>2000元—3000元</option>
@@ -66,19 +66,9 @@
 					</div>
 					<div class="fl">
 						<ul>
-							<li class="first">房屋位置</li>
-							<li>
-								<select name='house.district.id' id='district'>
-									<option value='0'>不限</option>
-								</select>
-							</li>
-						</ul>
-					</div>
-					<div class="fl">
-						<ul>
 							<li class="first">房型</li>
 							<li>
-								<select name='house.houseType.id' id='houseType'>
+								<select name="houseType.id">
 									<option value="0">不限</option>
 									<#list houseTypeList as houseType>
 									<option value="${houseType.id}">${houseType.name}</option>
@@ -91,7 +81,7 @@
 						<ul>
 							<li class="first">面积</li>
 							<li>
-								<select name='house.area' id='area'>
+								<select name='area' id='area'>
 									<option value='不限'>不限</option>
 									<option value='0-40'>40以下</option>
 									<option value='40-80'>40-80</option>
