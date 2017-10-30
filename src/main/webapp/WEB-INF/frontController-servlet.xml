@@ -60,6 +60,7 @@
 		<property name="order" value="10" />
 	</bean>
 	
+	<!-- 
 	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 	    <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
 	    <property name="defaultEncoding" value="utf-8"/>
@@ -77,5 +78,6 @@
 	    <property name="suffix" value=".ftl"/>
 	    <property name="order" value="4"/>
 	</bean>
+	-->
 	
 </beans>

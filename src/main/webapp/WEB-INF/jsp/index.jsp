@@ -40,13 +40,13 @@
 			</div>
 		</div>
 		<div id="navbar" class="wrap">
-			<form method="post" action="index" id='sform'>
+			<form method="post" action="searchHouse" id='sform'>
 				<div class="search clearfix">
 					<div class="fl">
 						<ul>
 							<li class="bold">房屋信息</li>
 							<li>标题：
-								<input type="text" class="text" name="title"> 
+								<input type="text" class="text" name="title" value="${searchParam.title}"> 
 								<label class="ui-blue"> 
 								<input type="submit" name="search" value="搜索房屋">
 							</label>
@@ -57,7 +57,7 @@
 						<ul>
 							<li class="first">价格</li>
 							<li>
-								<select name='house.price' id='price'>
+								<select name='price' id='price'>
 									<option value='不限'>不限</option>
 									<option value='0-600'>600元以下</option>
 									<option value='600-1000'>600元—1000元</option>
@@ -74,11 +74,8 @@
 						<ul>
 							<li class="first">房屋位置</li>
 							<li>
-								<select name='house.district.id' id='district'>
+								<select name='district' id='district'>
 									<option value='0'>不限</option>
-									<c:forEach items="${districtList}" var="dis">
-										<option value='${dis.id}'>${dis.name}</option>
-									</c:forEach>
 								</select>
 							</li>
 						</ul>
@@ -87,10 +84,18 @@
 						<ul>
 							<li class="first">房型</li>
 							<li>
-								<select name='house.houseType.id' id='houseType'>
+								<select name='houseType.id' id='houseType'>
 									<option value='0'>不限</option>
 									<c:forEach items="${houseTypeList}" var="houseType">
-									<option value='${houseType.id}'>${houseType.name}</option>
+									<c:choose>
+										<c:when test="${searchParam != null and searchParam.houseType.id == houseType.id}">
+											<c:set var="sel" value="selected" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="sel" value="" />
+										</c:otherwise>
+									</c:choose>
+									<option value="${houseType.id}" ${sel}>${houseType.name}</option>
 									</c:forEach>
 								</select>
 							</li>
@@ -100,7 +105,7 @@
 						<ul>
 							<li class="first">面积</li>
 							<li>
-								<select name='house.area' id='area'>
+								<select name='area' id='area'>
 									<option value='不限'>不限</option>
 									<option value='0-40'>40以下</option>
 									<option value='40-80'>40-80</option>
@@ -144,14 +149,14 @@
 			</table>
 			<div class="pager">
 				<ul>
-					<li class="current"><a href="home?page=1">首页</a></li>
+					<li class="current"><a href="${url}?page=1">首页</a></li>
 					<c:if test="${currentPage > 1}">
-					<li><a href="home?page=${currentPage - 1}">上一页</a></li>
+					<li><a href="${url}?page=${currentPage - 1}">上一页</a></li>
 					</c:if>
 					<c:if test="${currentPage < totalPage}">
-					<li><a href="home?page=${currentPage + 1}">下一页</a></li>
+					<li><a href="${url}?page=${currentPage + 1}">下一页</a></li>
 					</c:if>
-					<li><a href="home?page=${totalPage}">末页</a></li>
+					<li><a href="${url}?page=${totalPage}">末页</a></li>
 				</ul>
 				<span class="total">${currentPage}/${totalPage}页</span>
 			</div>

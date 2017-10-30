@@ -49,6 +49,7 @@ public class HomeController {
 		model.addAttribute("houseList", pageBean.getDataModel());
 		model.addAttribute("currentPage", pageBean.getCurrentPage());
 		model.addAttribute("totalPage", pageBean.getTotalPage());
+		model.addAttribute("url", "home");
 		return "index";
 	}
 	

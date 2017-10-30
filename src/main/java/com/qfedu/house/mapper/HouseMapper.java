@@ -9,7 +9,7 @@ import com.qfedu.house.dto.SearchHouseParam;
 
 public interface HouseMapper {
 
-	List<House> findBySearchParam(@Param("param") SearchHouseParam param, @Param("offset") int offset, @Param("size") int size);
+	List<House> findBySearchParam(@Param("houseInfo") SearchHouseParam param, @Param("offset") int offset, @Param("size") int size);
 	
-	int countBySearchParam(SearchHouseParam param);
+	int countBySearchParam(@Param("houseInfo") SearchHouseParam param);
 }

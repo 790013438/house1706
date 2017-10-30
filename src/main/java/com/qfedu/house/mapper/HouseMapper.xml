@@ -43,11 +43,50 @@
 	</resultMap>
 
 	<select id="findBySearchParam" resultMap="houseResultMap">
-	
+		select houseid, title, area, floor, totalFloor, price, street, mainPhoto, pubDate, detail, 
+				userid, username, 
+				contacterName, contacterTel, contacterQQ, contacterEmail,
+				distid, distname,
+				typeid, typename
+		from tb_house
+		left outer join tb_user on user_id=userid
+		left outer join tb_district on district_id=distid
+		left outer join tb_house_type on house_type_id=typeid
+		<where>
+				<if test="houseInfo.price != null"> 
+				and price between #{houseInfo.minPrice} and #{houseInfo.maxPrice}
+				</if>
+				<if test="houseInfo.area != null">
+				and area between #{houseInfo.minArea} and #{houseInfo.maxArea}
+				</if>
+				<if test="houseInfo.title != null and houseInfo.title.length != 0">
+				and title like concat('%', #{houseInfo.title}, '%')
+				</if>
+				<if test="houseInfo.houseType != null and houseInfo.houseType.id != 0">
+				and house_type_id=#{houseInfo.houseType.id}
+				</if>
+		</where>
+		order by pubDate desc
+		limit #{offset}, #{size}
 	</select>
 	
-	<select id="countBySearchParam">
-		
+	<select id="countBySearchParam" resultType="int">
+		select count(houseid)
+		from tb_house
+		<where>
+				<if test="houseInfo.price != null"> 
+				and price between #{houseInfo.minPrice} and #{houseInfo.maxPrice}
+				</if>
+				<if test="houseInfo.area != null">
+				and area between #{houseInfo.minArea} and #{houseInfo.maxArea}
+				</if>
+				<if test="houseInfo.title != null and houseInfo.title.length != 0">
+				and title like concat('%', #{houseInfo.title}, '%')
+				</if>
+				<if test="houseInfo.houseType != null and houseInfo.houseType.id != 0">
+				and house_type_id=#{houseInfo.houseType.id}
+				</if>
+		</where>
 	</select>
 
 </mapper>

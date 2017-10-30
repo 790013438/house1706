@@ -15,6 +15,10 @@ public class SearchHouseParam {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getPrice() {
+		return price;
+	}
 
 	public Double getMinPrice() {
 		return price.equals("²»ÏÞ") ?
@@ -36,6 +40,10 @@ public class SearchHouseParam {
 
 	public void setHouseType(HouseType houseType) {
 		this.houseType = houseType;
+	}
+	
+	public String getArea() {
+		return area;
 	}
 
 	public Integer getMinArea() {

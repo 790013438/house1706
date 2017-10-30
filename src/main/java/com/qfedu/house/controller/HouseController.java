@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.qfedu.house.domain.House;
@@ -21,23 +23,40 @@ import com.qfedu.house.dto.SearchHouseParam;
 import com.qfedu.house.service.HouseService;
 import com.qfedu.house.util.CommonUtil;
 
+@SessionAttributes({ "searchParam" })
 @Controller
 public class HouseController {
 	
 	@Autowired
 	private HouseService houseService;
 	
+	@GetMapping("/searchHouse")
+	public String searchHouseWithGet(
+			@SessionAttribute SearchHouseParam searchParam,
+			@RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "10") int size, 
+			Model model) {
+		PageBean<House> pageBean = 
+				houseService.searchHousesWithParamByPage(searchParam, page, size);
+		model.addAttribute("houseList", pageBean.getDataModel());
+		model.addAttribute("currentPage", pageBean.getCurrentPage());
+		model.addAttribute("totalPage", pageBean.getTotalPage());
+		model.addAttribute("url", "searchHouse");
+		return "index";
+	}
+	
 	@PostMapping("/searchHouse")
-	public String searchHouse(SearchHouseParam param,
-			Errors errors,
+	public String searchHouse(SearchHouseParam searchParam,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int size,
 			Model model) {
 		PageBean<House> pageBean = 
-				houseService.searchHousesWithParamByPage(param, page, size);
+				houseService.searchHousesWithParamByPage(searchParam, page, size);
 		model.addAttribute("houseList", pageBean.getDataModel());
 		model.addAttribute("currentPage", pageBean.getCurrentPage());
 		model.addAttribute("totalPage", pageBean.getTotalPage());
+		model.addAttribute("searchParam", searchParam);
+		model.addAttribute("url", "searchHouse");
 		return "index";
 	}
 
