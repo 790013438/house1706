@@ -10,11 +10,10 @@ import com.qfedu.house.domain.House;
 import com.qfedu.house.domain.HouseType;
 import com.qfedu.house.dto.PageBean;
 import com.qfedu.house.dto.SearchHouseParam;
+import com.qfedu.house.mapper.HouseMapper;
 import com.qfedu.house.persistence.HouseDao;
 import com.qfedu.house.persistence.HouseTypeDao;
 import com.qfedu.house.service.HouseService;
-import com.qfedu.house.util.HQLQueryBean;
-import com.qfedu.house.util.QueryBean;
 
 @Service
 public class HouseServiceImpl implements HouseService {
@@ -22,6 +21,8 @@ public class HouseServiceImpl implements HouseService {
 	private HouseTypeDao houseTypeDao;
 	@Autowired
 	private HouseDao houseDao;
+	@Autowired
+	private HouseMapper houseMapper;
 	
 	@Transactional(readOnly = true)
 	@Override
@@ -44,15 +45,19 @@ public class HouseServiceImpl implements HouseService {
 	@Transactional(readOnly = true)
 	@Override
 	public PageBean<House> searchHousesWithParamByPage(SearchHouseParam param, int page, int size) {
-		QueryBean queryBean = new HQLQueryBean(House.class)
-				.addCondition("title like ?", "%" + param.getTitle() + "%")
-				.addCondition(param.getHouseType().getId() != 0, "houseType=?", param.getHouseType())
-				.addCondition("area>=?", param.getMinArea())
-				.addCondition("area<=?", param.getMaxArea())
-				.addCondition("price>=?", param.getMinPrice())
-				.addCondition("price<=?", param.getMaxPrice())
-				.addOrderBy("pubDate", false);
-		return houseDao.findByQueryAndPage(queryBean, page, size);
+		List<House> dataModel = houseMapper.findBySearchParam(param, (page -1 ) * size, size);
+		int total = houseMapper.countBySearchParam(param);
+		int totalPage = (total - 1) / size + 1;
+		return new PageBean<>(dataModel, totalPage, page, size);
+//		QueryBean queryBean = new HQLQueryBean(House.class)
+//				.addCondition("title like ?", "%" + param.getTitle() + "%")
+//				.addCondition(param.getHouseType().getId() != 0, "houseType=?", param.getHouseType())
+//				.addCondition("area>=?", param.getMinArea())
+//				.addCondition("area<=?", param.getMaxArea())
+//				.addCondition("price>=?", param.getMinPrice())
+//				.addCondition("price<=?", param.getMaxPrice())
+//				.addOrderBy("pubDate", false);
+//		return houseDao.findByQueryAndPage(queryBean, page, size);
 	}
 
 }

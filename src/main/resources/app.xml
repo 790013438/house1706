@@ -52,11 +52,23 @@
 		</property>
 	</bean>
 	
+	<!-- 配置MyBatis的SQLSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="basePackage" value="com.qfedu.house.mapper" />
+	</bean>
+	
 	<!-- 配置Spring提供的Hibernate事务管理器 -->
 	<bean id="transactionManager"
 	 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<!-- 通过setter注入 注入了SessionFactory对象 -->
 		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 	<!-- 配置使用声明式事务 -->

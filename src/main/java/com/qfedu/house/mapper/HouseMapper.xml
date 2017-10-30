@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.house.mapper.HouseMapper">
+
+	<resultMap type="houseType" id="houseTypeResultMap">
+		<id property="id" column="typeid" />
+		<result property="name" column="typename"/>
+	</resultMap>
+	
+	<resultMap type="district" id="districtResultMap">
+		<id property="id" column="distid" />
+		<result property="name" column="distname"/>
+	</resultMap>
+	
+	<resultMap type="contacter" id="contacterResultMap">
+		<result property="name" column="contacterName"/>
+		<result property="tel" column="contacterTel"/>
+		<result property="qq" column="contacterQQ"/>
+		<result property="email" column="contacterEmail"/>
+	</resultMap>
+	
+	<resultMap type="user" id="userResultMap">
+		<id property="id" column="userid" />
+		<result property="username" column="username"/>
+	</resultMap>
+
+	<resultMap type="house" id="houseResultMap">
+		<id property="id" column="houseid" />
+		<result property="title" column="title"/>
+		<result property="area" column="area" />
+		<result property="floor" column="floor" />
+		<result property="totalFloor" column="totalFloor" />
+		<result property="price" column="price" />
+		<result property="street" column="street" />
+		<result property="mainPhoto" column="mainPhoto"/>
+		<result property="pubDate" column="pubDate" />
+		<result property="detail" column="detail"/>
+		<association property="user" resultMap="userResultMap" />
+		<association property="contacter" resultMap="contacterResultMap" />
+		<association property="district" resultMap="districtResultMap" />
+		<association property="houseType" resultMap="houseTypeResultMap" />
+	</resultMap>
+
+	<select id="findBySearchParam" resultMap="houseResultMap">
+	
+	</select>
+	
+	<select id="countBySearchParam">
+		
+	</select>
+
+</mapper>
