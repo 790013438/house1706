@@ -52,6 +52,25 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 所谓的访问安全性就是让用户证明他是他声称的那个人 -->
+	<!-- 1. What you know? - 密码 -->
+	<!-- 2. What you have? - 密保卡 / U盾 -->
+	<!-- 3. Whom you are? - 指纹 / 虹膜 -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>protected</web-resource-name>
+			<url-pattern>/toPub</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>DIGEST</auth-method>
+		<realm-name>protected</realm-name>
+	</login-config>
+	
 	<!-- Open Session In View 过滤器 -->
 	<!-- 这种做法不适合访问量较大或高并发场景 这是一种反模式 -->
 	<!-- 最好的做法是根据需要在业务层强制加载或者通过组装DTO的方式加载数据 -->
